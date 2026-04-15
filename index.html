@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EarnStack MVP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+  <style>
+    :root,[data-theme="light"]{--text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);--text-base:clamp(1rem,.95rem + .25vw,1.125rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);--text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);--text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);--space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;--color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;--color-surface-offset:#f1efea;--color-border:#d4d1ca;--color-text:#28251d;--color-text-muted:#69665f;--color-text-faint:#aaa59b;--color-text-inverse:#f9f8f4;--color-primary:#01696f;--color-primary-hover:#0c4e54;--color-primary-highlight:#cedcd8;--color-success:#437a22;--color-warning:#da7101;--radius-sm:.4rem;--radius-md:.75rem;--radius-lg:1rem;--radius-xl:1.25rem;--radius-full:999px;--shadow-sm:0 1px 2px rgb(40 37 29 / .06);--shadow-md:0 10px 28px rgb(40 37 29 / .1);--shadow-lg:0 24px 60px rgb(40 37 29 / .16);--font-body:'General Sans',Inter,sans-serif;--font-display:'Cabinet Grotesk','General Sans',sans-serif;--transition:180ms cubic-bezier(.16,1,.3,1);--content:1220px}
+    [data-theme="dark"]{--color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;--color-surface-offset:#262320;--color-border:#393836;--color-text:#eee8df;--color-text-muted:#b5aea3;--color-text-faint:#7e776c;--color-text-inverse:#171614;--color-primary:#4f98a3;--color-primary-hover:#77b4bd;--color-primary-highlight:#243336;--color-success:#85bd61;--color-warning:#f5ae4d;--shadow-sm:0 1px 2px rgb(0 0 0 / .22);--shadow-md:0 10px 30px rgb(0 0 0 / .3);--shadow-lg:0 24px 70px rgb(0 0 0 / .45)}
+    *,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:none;text-size-adjust:none}body{margin:0;background:radial-gradient(circle at top right,color-mix(in srgb,var(--color-primary) 16%,transparent),transparent 24%),var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-base);line-height:1.6}img,svg{display:block;max-width:100%}button,input,textarea,select{font:inherit;color:inherit}a{text-decoration:none;color:inherit}h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;margin:0}p{margin:0;max-width:75ch}
+    .shell{max-width:var(--content);margin:auto;padding:0 var(--space-4)}.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--color-primary);color:var(--color-text-inverse);padding:.7rem 1rem;border-radius:var(--radius-md);z-index:1000}
+    header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--color-bg) 80%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--color-text) 10%,transparent)}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-4) 0}.brand{display:flex;align-items:center;gap:.85rem;font-weight:700}.brand svg{width:38px;height:38px}.brand small{display:block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--color-text-muted)}
+    .navlinks{display:flex;flex-wrap:wrap;gap:var(--space-4)}.navlinks a{font-size:var(--text-sm);color:var(--color-text-muted)}
+    .btn,.icon-btn{min-height:44px;border-radius:var(--radius-full);border:1px solid color-mix(in srgb,var(--color-text) 10%,transparent);background:var(--color-surface);cursor:pointer;transition:transform var(--transition),background var(--transition),border-color var(--transition),color var(--transition)}
+    .btn{padding:.85rem 1.15rem;font-weight:600}.btn:hover,.icon-btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--color-primary);color:var(--color-text-inverse);border-color:transparent;box-shadow:var(--shadow-md)}.btn-primary:hover{background:var(--color-primary-hover)}.icon-btn{width:44px;padding:0;display:grid;place-items:center}
+    main{padding:var(--space-8) 0 var(--space-16)}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-8);padding:var(--space-8) 0 var(--space-12)}.hero h1{font-size:clamp(2.7rem,4vw,4.9rem);max-width:11ch;margin-top:var(--space-4)}.eyebrow{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem .8rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.08em}.lead{margin-top:var(--space-4);font-size:var(--text-lg);color:var(--color-text-muted)}
+    .panel,.card,.result-card,.template-card{background:linear-gradient(180deg,color-mix(in srgb,var(--color-surface-2) 96%,transparent),var(--color-surface));border:1px solid color-mix(in srgb,var(--color-text) 10%,transparent);border-radius:var(--radius-xl);box-shadow:var(--shadow-md)}
+    .panel{padding:var(--space-6)}
+    .hero-side{display:grid;gap:var(--space-4)}.stats{display:grid;gap:var(--space-3)}.stat{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:var(--space-3);border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}.stat strong{font-size:var(--text-lg)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:var(--space-4);margin-bottom:var(--space-5)}.section-head h2{font-size:var(--text-2xl)}.section-head p{color:var(--color-text-muted)}
+    .app-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-5);align-items:start}.builder{padding:var(--space-5)}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}label{display:grid;gap:.45rem;font-size:var(--text-sm);font-weight:600}input,textarea,select{width:100%;padding:.95rem 1rem;background:var(--color-surface-offset);border:1px solid color-mix(in srgb,var(--color-text) 10%,transparent);border-radius:var(--radius-md);outline:none}textarea{min-height:130px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-primary) 18%,transparent)}
+    .builder-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-5)}
+    .tips{display:grid;gap:var(--space-4)}.card,.result-card,.template-card{padding:var(--space-5)}.muted{color:var(--color-text-muted)}.tiny{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}.template-card{cursor:pointer;position:relative}.template-card.active{border-color:var(--color-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-primary) 18%,transparent),var(--shadow-md)}.template-preview{aspect-ratio:16/10;border-radius:var(--radius-lg);margin-bottom:var(--space-4);padding:var(--space-3);border:1px solid color-mix(in srgb,var(--color-text) 8%,transparent);display:grid;gap:.45rem}.preview-line{height:8px;border-radius:999px;background:color-mix(in srgb,var(--color-text) 12%,transparent)}
+    .results{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-5)}.result-card h3{font-size:var(--text-lg);margin-bottom:var(--space-3)}.result-card ul{padding-left:1.1rem;margin:0;display:grid;gap:.55rem}.result-card li{max-width:50ch}
+    .portfolio-preview{margin-top:var(--space-5);padding:var(--space-6)}.portfolio-frame{margin-top:var(--space-4);background:var(--color-bg);border-radius:var(--radius-lg);border:1px solid color-mix(in srgb,var(--color-text) 10%,transparent);overflow:hidden}.portfolio-top{padding:var(--space-6);background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 18%,transparent),transparent 60%),var(--color-surface)}.pill{display:inline-flex;align-items:center;padding:.35rem .7rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;letter-spacing:.05em;text-transform:uppercase}.portfolio-body{display:grid;grid-template-columns:1.3fr .7fr;gap:var(--space-5);padding:var(--space-5)}.block{padding:var(--space-4);background:var(--color-surface);border-radius:var(--radius-lg);border:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-top:var(--space-5)}.price{font-size:var(--text-xl)}
+    .footer-note{padding-top:var(--space-8);color:var(--color-text-muted);font-size:var(--text-sm)}
+    @media (max-width:1040px){.hero,.app-grid,.results,.pricing-grid,.template-grid,.portfolio-body{grid-template-columns:1fr 1fr}}
+    @media (max-width:780px){.nav{flex-direction:column;align-items:flex-start}.hero,.app-grid,.results,.pricing-grid,.template-grid,.portfolio-body,.field-grid{grid-template-columns:1fr}.hero{padding-top:var(--space-4)}.section-head{align-items:start;flex-direction:column}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="shell nav">
+    <div class="brand" aria-label="EarnStack logo">
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true">
+        <rect x="8" y="28" width="18" height="24" rx="4"></rect>
+        <rect x="24" y="18" width="18" height="34" rx="4"></rect>
+        <rect x="40" y="8" width="16" height="44" rx="4"></rect>
+        <path d="M12 20 L24 8 L34 18 L50 2" stroke="var(--color-primary)"></path>
+      </svg>
+      <div>EarnStack<small>Resume to Portfolio MVP</small></div>
+    </div>
+    <nav class="navlinks" aria-label="Primary navigation">
+      <a href="#builder">Builder</a>
+      <a href="#templates">Templates</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <button class="icon-btn" data-theme-toggle aria-label="Toggle color theme">◐</button>
+  </div>
+</header>
+
+<main id="main" class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Functional browser MVP</div>
+      <h1>Turn one resume into a portfolio, tailored bullets, and a job-ready pitch.</h1>
+      <p class="lead">This MVP works fully in the browser with no backend, so you can validate demand first, collect leads, and then connect AI APIs and payments in version two.</p>
+      <div class="builder-actions">
+        <a class="btn btn-primary" href="#builder">Start building</a>
+        <button class="btn" id="loadDemo">Load demo profile</button>
+      </div>
+    </div>
+    <aside class="hero-side">
+      <div class="panel stats">
+        <div class="stat"><span class="muted">Works now</span><strong>Resume parsing</strong></div>
+        <div class="stat"><span class="muted">Generates</span><strong>Portfolio preview</strong></div>
+        <div class="stat"><span class="muted">Adds</span><strong>Job-specific bullets</strong></div>
+        <div class="stat"><span class="muted">Can monetize</span><strong>Free + paid workflow</strong></div>
+      </div>
+      <div class="card">
+        <h3>How to validate quickly</h3>
+        <p class="muted">Offer one free generated preview, then charge for premium export, hosted public page, and tailored application packs.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section id="builder">
+    <div class="section-head">
+      <div>
+        <h2>Builder</h2>
+        <p>Paste resume details, choose a template, add a target job, and generate a polished output.</p>
+      </div>
+    </div>
+
+    <div class="app-grid">
+      <form class="panel builder" id="profileForm">
+        <div class="field-grid">
+          <label>Full name<input id="name" placeholder="Manish Anand" required></label>
+          <label>Headline<input id="headline" placeholder="AI Engineer | Full-Stack Developer | Automation Builder"></label>
+        </div>
+        <div class="field-grid" style="margin-top:1rem">
+          <label>Email<input id="email" placeholder="name@example.com"></label>
+          <label>Location<input id="location" placeholder="Noida, India"></label>
+        </div>
+        <label style="margin-top:1rem">Skills (comma separated)<input id="skills" placeholder="React, Node.js, AI automation, Three.js, Python"></label>
+        <label style="margin-top:1rem">Projects<textarea id="projects" placeholder="Project 1 - what you built | impact&#10;Project 2 - what you built | impact"></textarea></label>
+        <label style="margin-top:1rem">Experience<textarea id="experience" placeholder="Role - company - achievement&#10;Role - company - achievement"></textarea></label>
+        <label style="margin-top:1rem">Target job description<textarea id="jobDesc" placeholder="Paste the target job description here"></textarea></label>
+        <div class="builder-actions">
+          <button class="btn btn-primary" type="submit">Generate outputs</button>
+          <button class="btn" type="button" id="copySummary">Copy summary</button>
+          <button class="btn" type="button" id="downloadPreview">Download JSON</button>
+        </div>
+      </form>
+
+      <aside class="tips">
+        <div class="card">
+          <h3>What this MVP does</h3>
+          <p class="muted">It extracts structured profile data, rewrites a positioning summary, suggests role-matched bullet points, and composes a portfolio layout preview instantly in the browser.</p>
+        </div>
+        <div class="card">
+          <h3>What to add next</h3>
+          <p class="muted">Connect an LLM API for stronger rewrites, Razorpay for checkout, authentication, and hosted subdomain portfolio pages.</p>
+        </div>
+        <div class="card">
+          <h3>Fast monetization angle</h3>
+          <p class="muted">Use this as a lead-gen tool: free preview, then upsell custom export, hosted site, and tailored resume packs.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="results" aria-live="polite">
+      <article class="result-card">
+        <h3>Professional summary</h3>
+        <p id="summaryOutput" class="muted">Your generated professional summary appears here.</p>
+      </article>
+      <article class="result-card">
+        <h3>ATS-style bullet suggestions</h3>
+        <ul id="bulletOutput"><li class="muted">Generate outputs to see tailored bullets.</li></ul>
+      </article>
+      <article class="result-card">
+        <h3>Suggested pricing for this user</h3>
+        <p id="pricingHint" class="muted">Starter preview can be free, while tailored kits and hosted profiles can be premium.</p>
+      </article>
+      <article class="result-card">
+        <h3>Lead capture / sales pitch</h3>
+        <p id="pitchOutput" class="muted">Your one-line conversion pitch appears here.</p>
+      </article>
+    </div>
+
+    <div class="panel portfolio-preview">
+      <div class="section-head" style="margin-bottom:0">
+        <div>
+          <h2 style="font-size:var(--text-xl)">Portfolio preview</h2>
+          <p>What the user sees before paying for export or hosted publishing.</p>
+        </div>
+      </div>
+      <div class="portfolio-frame">
+        <div class="portfolio-top">
+          <span class="pill" id="previewTag">AI-ready profile</span>
+          <h3 id="previewName" style="font-size:var(--text-2xl);margin-top:1rem">Your Name</h3>
+          <p id="previewHeadline" class="muted" style="margin-top:.5rem">Your headline will appear here.</p>
+          <p id="previewSummary" style="margin-top:1rem">Generated summary preview.</p>
+        </div>
+        <div class="portfolio-body">
+          <section class="block">
+            <h4 style="margin-bottom:.75rem">Projects</h4>
+            <div id="previewProjects" class="muted">Project highlights appear here.</div>
+          </section>
+          <aside class="block">
+            <h4 style="margin-bottom:.75rem">Skills</h4>
+            <div id="previewSkills" class="muted">Skills appear here.</div>
+          </aside>
+          <section class="block">
+            <h4 style="margin-bottom:.75rem">Experience</h4>
+            <div id="previewExperience" class="muted">Experience highlights appear here.</div>
+          </section>
+          <aside class="block">
+            <h4 style="margin-bottom:.75rem">Contact</h4>
+            <div id="previewContact" class="muted">Email • Location</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="templates">
+    <div class="section-head">
+      <div>
+        <h2>Templates</h2>
+        <p>These are the first monetizable styles you can sell as premium themes.</p>
+      </div>
+    </div>
+    <div class="template-grid" id="templateGrid">
+      <article class="template-card active" data-template="Professional Slate">
+        <div class="template-preview" style="background:linear-gradient(135deg, color-mix(in srgb,var(--color-primary) 10%, transparent), transparent 70%), var(--color-surface-offset)">
+          <div class="preview-line" style="width:36%;height:10px"></div>
+          <div class="preview-line" style="width:64%"></div>
+          <div class="preview-line" style="width:92%"></div>
+          <div class="preview-line" style="width:78%"></div>
+        </div>
+        <h3>Professional Slate</h3>
+        <p class="muted">Best for AI, software, and engineering applicants.</p>
+      </article>
+      <article class="template-card" data-template="Founder Glow">
+        <div class="template-preview" style="background:linear-gradient(135deg, color-mix(in srgb,var(--color-warning) 16%, transparent), transparent 72%), var(--color-surface-offset)">
+          <div class="preview-line" style="width:30%;height:10px"></div>
+          <div class="preview-line" style="width:60%"></div>
+          <div class="preview-line" style="width:95%"></div>
+          <div class="preview-line" style="width:70%"></div>
+        </div>
+        <h3>Founder Glow</h3>
+        <p class="muted">For freelancers, makers, and personal brand selling.</p>
+      </article>
+      <article class="template-card" data-template="Minimal Dark">
+        <div class="template-preview" style="background:linear-gradient(135deg, color-mix(in srgb,var(--color-text) 14%, transparent), transparent 72%), var(--color-surface-offset)">
+          <div class="preview-line" style="width:40%;height:10px"></div>
+          <div class="preview-line" style="width:55%"></div>
+          <div class="preview-line" style="width:88%"></div>
+          <div class="preview-line" style="width:74%"></div>
+        </div>
+        <h3>Minimal Dark</h3>
+        <p class="muted">For premium, modern, high-signal applications.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="section-head">
+      <div>
+        <h2>Monetization setup</h2>
+        <p>Use a free preview to drive usage, then convert on outcome and convenience.</p>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+      <article class="card">
+        <h3>Free</h3>
+        <p class="price">₹0</p>
+        <p class="muted">One preview, one theme, watermark, no custom export.</p>
+      </article>
+      <article class="card">
+        <h3>Pro export</h3>
+        <p class="price">₹499</p>
+        <p class="muted">Unlimited edits, PDF export, premium template, job-tailored bullets.</p>
+      </article>
+      <article class="card">
+        <h3>Done-with-you</h3>
+        <p class="price">₹2,499+</p>
+        <p class="muted">Manual optimization, recruiter-ready polish, custom portfolio guidance.</p>
+      </article>
+    </div>
+    <div class="panel" style="margin-top:1.25rem">
+      <div class="section-head" style="margin-bottom:1rem">
+        <div>
+          <h2 style="font-size:var(--text-xl)">Premium support</h2>
+          <p>Premium customers also get a live showcase project that can be featured in their portfolio or profile.</p>
+        </div>
+      </div>
+      <div class="results" style="margin-top:0">
+        <article class="result-card">
+          <h3>What premium includes</h3>
+          <ul>
+            <li>Live project showcase page for your profile.</li>
+            <li>Stronger portfolio presentation and recruiter-facing polish.</li>
+            <li>Priority help on WhatsApp for setup and support.</li>
+          </ul>
+        </article>
+        <article class="result-card">
+          <h3>Direct pay and support</h3>
+          <p class="muted" style="margin-bottom:.8rem">UPI ID: <strong>7019790887@ybl</strong></p>
+          <p class="muted" style="margin-bottom:1rem">WhatsApp support: <strong>+91 7019790887</strong></p>
+          <div class="builder-actions" style="margin-top:0">
+            <a class="btn btn-primary" href="upi://pay?pa=7019790887@ybl&pn=EarnStack%20Premium&tn=EarnStack%20Premium%20Plan" target="_blank" rel="noopener noreferrer">Pay via UPI</a>
+            <a class="btn" href="https://wa.me/917019790887" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+          </div>
+          <p class="tiny" style="margin-top:.8rem">UPI links can open a supported UPI app on the device, and WhatsApp direct links use the international number format without the plus sign.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer-note">Next production step: connect an LLM API, add auth, save projects to a database, and integrate checkout for paid exports.</p>
+</main>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const toggle = document.querySelector('[data-theme-toggle]');
+  let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  root.setAttribute('data-theme', theme);
+  const paintToggle = () => toggle.textContent = root.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+  paintToggle();
+  toggle.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', theme); paintToggle(); });
+
+  const form = document.getElementById('profileForm');
+  const fields = {
+    name: document.getElementById('name'),
+    headline: document.getElementById('headline'),
+    email: document.getElementById('email'),
+    location: document.getElementById('location'),
+    skills: document.getElementById('skills'),
+    projects: document.getElementById('projects'),
+    experience: document.getElementById('experience'),
+    jobDesc: document.getElementById('jobDesc')
+  };
+
+  const outputs = {
+    summary: document.getElementById('summaryOutput'),
+    bullets: document.getElementById('bulletOutput'),
+    pricingHint: document.getElementById('pricingHint'),
+    pitch: document.getElementById('pitchOutput'),
+    previewName: document.getElementById('previewName'),
+    previewHeadline: document.getElementById('previewHeadline'),
+    previewSummary: document.getElementById('previewSummary'),
+    previewProjects: document.getElementById('previewProjects'),
+    previewSkills: document.getElementById('previewSkills'),
+    previewExperience: document.getElementById('previewExperience'),
+    previewContact: document.getElementById('previewContact'),
+    previewTag: document.getElementById('previewTag')
+  };
+
+  let selectedTemplate = 'Professional Slate';
+
+  const cleanList = (text) => text.split(/\n+/).map(x => x.trim()).filter(Boolean);
+  const skillList = (text) => text.split(',').map(x => x.trim()).filter(Boolean);
+  const extractKeywords = (text) => {
+    const pool = (text || '').toLowerCase().match(/[a-zA-Z+#.]{4,}/g) || [];
+    const stop = new Set(['with','that','this','have','will','your','from','into','their','about','they','them','role','team','work','build','built','using','used','need','needs','able','experience','skills','years','year','developer','engineer']);
+    const freq = {};
+    pool.forEach(w => { if(!stop.has(w)) freq[w] = (freq[w] || 0) + 1; });
+    return Object.entries(freq).sort((a,b) => b[1]-a[1]).slice(0,6).map(([w]) => w);
+  };
+
+  const capitalize = (s) => s.replace(/\b\w/g, c => c.toUpperCase());
+
+  function generate() {
+    const name = fields.name.value.trim() || 'Your Name';
+    const headline = fields.headline.value.trim() || 'Professional headline';
+    const email = fields.email.value.trim() || 'name@example.com';
+    const location = fields.location.value.trim() || 'Your location';
+    const skills = skillList(fields.skills.value);
+    const projects = cleanList(fields.projects.value);
+    const experience = cleanList(fields.experience.value);
+    const jd = fields.jobDesc.value.trim();
+    const keywords = extractKeywords(jd);
+
+    const summary = `${name} is a ${headline.toLowerCase()} focused on shipping practical, high-ownership solutions. With strength in ${skills.slice(0,4).join(', ') || 'modern digital products'}, this profile is positioned for roles that value execution, adaptability, and visible project impact.`;
+    outputs.summary.textContent = summary;
+
+    const bullets = [
+      `Tailored profile for ${keywords.slice(0,2).map(capitalize).join(' and ') || 'target role'} with emphasis on measurable project outcomes and cleaner positioning.`,
+      `Highlighted ${skills.slice(0,3).join(', ') || 'relevant technical strengths'} to match the most repeated job-description signals.`,
+      `Converted raw experience into recruiter-friendly statements that balance ATS keywords with readable human language.`
+    ];
+    outputs.bullets.innerHTML = bullets.map(b => `<li>${b}</li>`).join('');
+
+    const pricingHint = keywords.length >= 4
+      ? 'This user shows high intent because a job description was provided. Offer a free preview, then pitch a ₹499 tailored export and a ₹2,499 premium optimization package.'
+      : 'This user is early-stage. Keep the first result free and pitch a low-friction upgrade for premium templates and downloadable exports.';
+    outputs.pricingHint.textContent = pricingHint;
+
+    const pitch = `Get a recruiter-ready portfolio, sharper resume bullets, and a job-specific application kit in minutes${keywords[0] ? ' for ' + capitalize(keywords[0]) + '-focused roles' : ''}.`;
+    outputs.pitch.textContent = pitch;
+
+    outputs.previewName.textContent = name;
+    outputs.previewHeadline.textContent = headline;
+    outputs.previewSummary.textContent = summary;
+    outputs.previewProjects.innerHTML = projects.length ? projects.map(item => `<p style="margin-bottom:.65rem">${item}</p>`).join('') : '<p class="muted">Project highlights appear here.</p>';
+    outputs.previewSkills.innerHTML = skills.length ? skills.map(s => `<span style="display:inline-flex;margin:.2rem;padding:.35rem .65rem;border-radius:999px;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700">${s}</span>`).join(' ') : '<p class="muted">Skills appear here.</p>';
+    outputs.previewExperience.innerHTML = experience.length ? experience.map(item => `<p style="margin-bottom:.65rem">${item}</p>`).join('') : '<p class="muted">Experience highlights appear here.</p>';
+    outputs.previewContact.textContent = `${email} • ${location}`;
+    outputs.previewTag.textContent = selectedTemplate;
+
+    const payload = { name, headline, email, location, skills, projects, experience, jobDescription: jd, selectedTemplate, generatedSummary: summary, bullets, pitch };
+    window.currentEarnStackPayload = payload;
+    return payload;
+  }
+
+  form.addEventListener('submit', (e) => { e.preventDefault(); generate(); });
+
+  document.getElementById('loadDemo').addEventListener('click', () => {
+    fields.name.value = 'Manish Anand';
+    fields.headline.value = 'AI Engineer | Full-Stack Developer | Automation Builder';
+    fields.email.value = 'manish@example.com';
+    fields.location.value = 'Noida, Uttar Pradesh, India';
+    fields.skills.value = 'React, Node.js, Python, Three.js, AI automation, Prompt workflows';
+    fields.projects.value = '3D portfolio site - built an immersive React + Three.js portfolio with interactive visuals and deployment readiness\nAutomation workflow builder - created practical flows for repetitive digital tasks and service delivery';
+    fields.experience.value = 'Web Developer - delivered and deployed web applications with ownership across implementation and release workflows\nTechnical trainer - guided learners through practical software and technical concepts with hands-on examples';
+    fields.jobDesc.value = 'Looking for an AI engineer or full-stack developer who can build product features quickly, work with automation, improve user experience, and turn ideas into deployable web applications.';
+    generate();
+    window.scrollTo({top: document.getElementById('builder').offsetTop - 70, behavior:'smooth'});
+  });
+
+  document.getElementById('copySummary').addEventListener('click', async () => {
+    const payload = window.currentEarnStackPayload || generate();
+    try {
+      await navigator.clipboard.writeText(payload.generatedSummary);
+      const btn = document.getElementById('copySummary');
+      const old = btn.textContent; btn.textContent = 'Copied'; setTimeout(() => btn.textContent = old, 1200);
+    } catch {}
+  });
+
+  document.getElementById('downloadPreview').addEventListener('click', () => {
+    const payload = window.currentEarnStackPayload || generate();
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'earnstack-profile.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  document.querySelectorAll('.template-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      selectedTemplate = card.dataset.template;
+      outputs.previewTag.textContent = selectedTemplate;
+    });
+  });
+
+  generate();
+})();
+</script>
+</body>
+</html>
